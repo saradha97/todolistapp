@@ -1,24 +1,75 @@
 <!DOCTYPE html>
 <html>
+<head>
+<style>
+ body{
+ background-color:turquoise;
+ color:purple;
+ font-size: 150%;
+}
+div {
+    display:none;
+}
+.strike {
+    text-decoration: line-through;
+}
+button{
+background-color:gray;
+    border: none;
+    color:black;
+    padding: 7px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 2px 2px;
+    cursor: pointer;
+}
+</style>
+</head>
 <body>
 <center>
 Add task:
 <input type="text" id="task" name="task" ><br>
 <button onclick="myFunction()">Add</button><BR>
-<h2 id="demo"></h2>
-<button onclick="myFunction1()">completed</button><BR>
-<button onclick="myFunction2()">delete</button><BR>
+<ul id="demo">
+<li>
+</li>
+</ul>
+<div>
+<button class="completed" >completed</button><BR>
+<button class="delete" >delete</button><BR>
+</div>
 <script>
-function myFunction() {
-     document.getElementById('demo').innerHTML = 
-                    document.getElementById("task").value;
+function myFunction(){
+    var node1 = document.createElement("li");
+    var node2 = document.getElementById("task").value;
+    var text = document.createTextNode(node2);
+    node1.appendChild(text);
+   document.getElementById("demo").appendChild(node1);
+    var cbutton=document.createElement("button");
+    cbutton.innerText="completed";
+    cbutton.className="completed";
+    node1.appendChild(cbutton);
+    document.getElementById("demo").appendChild(node1);
+    var dbutton=document.createElement("button");
+    dbutton.innerText="delete";
+    dbutton.className="delete";
+    node1.appendChild(dbutton);
+   document.getElementById("demo").appendChild(node1);
+   var close = document.getElementsByClassName("delete");
+  var com = document.getElementsByClassName("completed");
+   var i;
+    for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+    var div = this.parentElement;
+    div.style.display = "none";
 }
-function myFunction1() {
- var x=document.getElementById("task").value;
-     document.getElementById('demo').innerHTML =x.strike()
+   com[i].onclick = function(){
+    var div = this.parentElement;
+    div.classList.toggle('strike');
 }
-function myFunction2() {
-     document.getElementById('demo').innerHTML =""
+}
 }
 </script>
 </center>
